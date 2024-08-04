@@ -2,6 +2,8 @@ import logging
 import redis
 from os import environ
 
+logging.basicConfig(level=logging.INFO)
+
 db_config = {
     'PASS': environ.get('PASS', ''),
     'DOMAIN': environ.get('DOMAIN', ''),
@@ -42,6 +44,7 @@ def redis_write_hash(size: int = 100) -> bool:
             r.set(generate_random_hash(db_config['HASH_SIZE']), generate_random_hash(db_config['HASH_SIZE']))
         return True
     return False
+
 
 if __name__ == '__main__':
     redis_write_hash(db_config['RECORDS'])
